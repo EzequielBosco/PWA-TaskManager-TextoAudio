@@ -1,0 +1,33 @@
+{
+    "name": "TaskSound",
+    "short_name": "TaskSound",
+    "description": "Aplicación Web Progresiva TaskSound",
+    "icons": [
+        {
+            "src": "img/logo-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "img/logo-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+       {
+        "src": "img/logo-144.png",
+        "type": "image/png",
+        "sizes": "144x144"
+        },
+        {
+            "src": "img/logo-64.png",
+            "type": "image/png",
+            "sizes": "64x64"
+        }
+    ],
+    "start_url": "/",
+    "orientation": "portrait",
+    "background_color": "#00008B",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#3367D6"
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskSound</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="img/logo-64.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="js/toastitv1.0-cdn-min.js"></script>
+    <script defer src="js/main.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <box-icon name='menu' id="menuToggle"></box-icon>
+            <ul id="menu" class="menu hidden">
+                <li id="menuCreateTask">Crear nueva tarea</li>
+                <li id="menuModificateStatus">Modificar estado en tarea</li>
+                <li id="menuConfigurationApp">Configurar aplicación</li>
+            </ul>
+        </nav>
+        <h3>TaskSound</h3>
+        <img src="img/logo-192.png" alt="Logo" title="Logo TaskSound">            
+    </header>
+    <main>
+        <div id="modalCreateTask" class="modal">
+            <section class="task-form-modal">
+                <span class="close-modal" data-modal-id="modalCreateTask">&times;</span>
+                <h1>Task Sound</h1>
+                <h3>Nueva tarea</h3>
+                <form class="form">
+                    <label for="taskTitle">Título</label>
+                    <input type="text" id="taskTitle" placeholder="Ingresa un título..." required>
+                    <label for="taskDescription">Descripción</label>
+                    <textarea id="taskDescription" placeholder="Ingresa una descripción" required></textarea>
+                    <button type="submit" id="addTaskBtn">Agregar tarea</button>
+                </form>
+            </section>
+        </div>
+        <section class="content-section">
+            <section class="task-list-section">
+                <h2>Lista de Tareas</h2>
+                <button id="btnCargar">Cargar tareas</button>
+                <div class="task-list" id="taskList"></div>
+            </section>
+            <aside>
+                <img src="img/task-ilustration.svg" alt="Task Ilustracion">
+            </aside>
+        </section>
+    </main>
+    <footer>
+        <p>©Copyright 2024 - <a href="https://github.com/EzequielBosco" target="_blank"><em>Ezequiel Bosco </em></a>- Aplicaciones Web Progresivas</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,303 @@
+@import url("normalize.css");
+@import url("toastitv1.0.css");
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Header */
+
+header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px var(--shadow);
+    padding: 10px 0;
+    gap: 2rem;
+    width: 100%;
+    z-index: 15;
+    background-color: var(--back);
+}
+
+nav {
+    margin-top: 5px;
+}
+
+header img {
+    width: 40px;
+    margin-right: 25px;
+}
+
+/* Menu */
+
+#menuToggle {
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+#menuToggle:hover {
+    background-color: var(--green);
+}
+
+.menu {
+    padding: 20px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px;
+    background-color: var(--green-1);
+    box-shadow: 2px 2px 8px var(--shadow);
+    border-radius: 5px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden; 
+    pointer-events: none;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.menu.show {
+    max-height: 500px; 
+    opacity: 1;
+    visibility: visible; 
+    pointer-events: auto;
+}
+
+.menu li {
+    margin: 15px;
+    text-decoration: underline;
+}
+
+.menu li:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
+.menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.menu a:hover {
+    background-color: var(--blue);
+    color: #fff;
+}
+
+
+/* Main */
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 200px;
+}
+
+/* Form modal */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal .task-form-modal {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+}
+
+.modal .form {
+    display: flex;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.close-modal {
+    color: var(--black);
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+} 
+
+.close-modal:hover,
+.close-modal:focus {
+    cursor: pointer;
+    color: var(--grey);
+}
+
+.form label {
+    margin: 10px 0 5px;
+}
+
+.form input[type="text"], .form textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--grey);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--blue-hover);
+}
+
+/* Content Section */
+
+.content-section {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    gap: 20px;
+}
+
+.task-list-section {
+    flex: 1 1 70%;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+aside {
+    flex: 1 1 30%;
+}
+
+.task-list {
+    list-style: none;
+}
+
+#taskList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 1rem;
+}
+
+/* Task Card */ 
+
+.task-item {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.task-item span {
+    font-size: 16px;
+}
+
+.task-item button {
+    background-color: var(--red);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+}
+
+.task-item button:hover {
+    background-color: var(--red-hover);
+}
+
+.task-item.completed {
+    background-color: #d4edda;
+    color: #155724;
+    opacity: 0.7; 
+}
+
+.task-item.completed h3,
+.task-item.completed p {
+    text-decoration: line-through;
+}
+
+/*Footer*/
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--green);
+    z-index: 15;
+    color: var(--white);
+}
+
+footer em {
+    color: var(--back);
+    transition: 0.2s ease-in-out;
+}
+
+footer em:hover {
+    color: var(--black);
+}
+
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .task-list-section {
+        padding-right: 0;
+    }
+
+    aside {
+        margin-top: 20px;
+        width: 50%;
+    }
+}
