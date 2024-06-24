@@ -7,20 +7,19 @@ const URLTasks = "https://66388ba94253a866a24e2e86.mockapi.io/api/parcial/tasks"
 
 /* Idiomas ------------------------------------------------------------------- */
 
-const ISOlangs = []
+// const ISOlangs = []
 const synthesis = speechSynthesis
 const utterance = new SpeechSynthesisUtterance()
 
-function obtenerVoces() {
-    const voices = synthesis.getVoices()
-    ISOlangs.push(...voices)
-    ISOlangs.sort((a, b) => {
-        if (a.lang > b.lang) return 1
-        if (a.lang < b.lang) return -1
-        return 0
-    })
-    console.table(ISOlangs)
-}
+// function obtenerVoces() {
+//     const voices = synthesis.getVoices()
+//     ISOlangs.push(...voices)
+//     ISOlangs.sort((a, b) => {
+//         if (a.lang > b.lang) return 1
+//         if (a.lang < b.lang) return -1
+//         return 0
+//     })
+// }
 
 const savedRate = localStorage.getItem('speechRate')
 const savedLanguage = localStorage.getItem('speechLanguage')
@@ -52,6 +51,9 @@ btnSaveConfig.addEventListener('click', function(e) {
         style: 'success',
         timer: 3000
     })
+    setTimeout(() => {
+        window.location.reload()
+    }, 1500)
 })
 
 inputRate.addEventListener("change", () => {
@@ -361,7 +363,7 @@ async function cargarTasks() {
 }
 
 cargarTasks()
-obtenerVoces()
+// obtenerVoces()
 
 const btnCargar = document.getElementById("btnCargar")
 btnCargar.addEventListener('click', function() {
