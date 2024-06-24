@@ -5,6 +5,97 @@ const taskList = document.getElementById('taskList')
 
 const URLTasks = "https://66388ba94253a866a24e2e86.mockapi.io/api/parcial/tasks"
 
+/* Idiomas ------------------------------------------------------------------- */
+
+const ISOlangs = []
+const synthesis = speechSynthesis
+const utterance = new SpeechSynthesisUtterance()
+
+function obtenerVoces() {
+    const voices = synthesis.getVoices()
+    ISOlangs.push(...voices)
+    ISOlangs.sort((a, b) => {
+        if (a.lang > b.lang) return 1
+        if (a.lang < b.lang) return -1
+        return 0
+    })
+    console.table(ISOlangs)
+}
+
+const savedRate = localStorage.getItem('speechRate')
+const savedLanguage = localStorage.getItem('speechLanguage')
+
+const inputRate = document.querySelector('input#inputRate')
+const taskLanguage = document.querySelector('select#taskLanguage')
+const labelInputRate = document.querySelector('p#labelInputRate')
+const btnSaveConfig = document.getElementById('saveConfigApp')
+
+if (savedRate) {
+    inputRate.value = savedRate
+    labelInputRate.textContent = 'Velocidad de reproducción: ' + savedRate
+}
+
+if (savedLanguage) {
+    taskLanguage.value = savedLanguage
+}
+
+btnSaveConfig.addEventListener('click', function(e) {
+    e.preventDefault()
+    const selectedRate = inputRate.value
+    const selectedLanguage = taskLanguage.value
+
+    localStorage.setItem('speechRate', selectedRate)
+    localStorage.setItem('speechLanguage', selectedLanguage)
+
+    ToastIt.now({
+        message: 'Configuraciones guardadas correctamente!',
+        style: 'success',
+        timer: 3000
+    })
+})
+
+inputRate.addEventListener("change", () => {
+    labelInputRate.textContent = 'Velocidad de reproducción: ' + inputRate.value
+})
+
+function reproducirTexto(texto, idioma, velocidad) {
+    utterance.text = texto || "Debes especificar un texto válido."
+    utterance.lang = idioma
+    utterance.pitch = 1
+    utterance.rate = velocidad
+
+    utterance.addEventListener("start", () => {
+        ToastIt.now({
+            message: "Reproduciendo audio...",
+            style: 'success',
+            timer: 3000
+        })
+    })
+    utterance.addEventListener("end", () => {
+        ToastIt.now({
+            message: "Finalizó el audio",
+            style: 'success',
+            timer: 2000
+        })
+        
+        setTimeout(() => {
+            window.location.reload()
+        }, 1500)
+    })
+
+    synthesis.speak(utterance)
+}
+
+function addSpeechEventListener(taskId) {
+    const btnSpeak = document.querySelector(`#task-${taskId} button#btnSpeak`)
+    btnSpeak.addEventListener("click", () => {
+        const taskDescription = document.querySelector(`#task-${taskId} .descriptionToVoice`).textContent
+        const selectedRate = localStorage.getItem('speechRate') || 1
+        const selectedLanguage = localStorage.getItem('speechLanguage') || 'es-ES'
+        reproducirTexto(taskDescription, selectedLanguage, selectedRate)
+    })
+}
+
 /* Card */
 
 function crearCardHTML(task) {
@@ -38,11 +129,17 @@ function crearCardHTML(task) {
             statusClass = 'not-started'
             break
     }
+
+    const descriptionToVoice = task.description
     
     return  `
             <article class="task-item ${statusClass}" id="${taskId}">
+                <button id="btnSpeak" title="Reproducir tarea">
+                    <box-icon name='play-circle'></box-icon>
+                </button>
                 <div>
                     <h3>${task.title}</h3>
+                    <p class="descriptionToVoice">${descriptionToVoice}</p>
                     <time class="task-meta">${date}</time>
                 </div>
                 <button class="btn-delete" id="btnDelete-${task.id}" title="Borrar tarea">
@@ -253,6 +350,7 @@ async function cargarTasks() {
 
                 taskList.appendChild(taskItem.firstElementChild)
                 addEventListenersToTask(taskData.id)
+                addSpeechEventListener(taskData.id)
         })
         } else {
             taskList.innerHTML = retornarError()
@@ -263,6 +361,7 @@ async function cargarTasks() {
 }
 
 cargarTasks()
+obtenerVoces()
 
 const btnCargar = document.getElementById("btnCargar")
 btnCargar.addEventListener('click', function() {
@@ -343,29 +442,6 @@ async function updateTaskStatus(taskId, newStatus) {
             close: true
         })
     }
-}
-
-/* Idiomas ------------------------------------------------------------------- */
-
-const languages = ['English', 'Español', 'Français', 'Deutsch', 'Italiano', 'Português']
-const languageSelect = document.getElementById('taskLanguage')
-
-languages.forEach(language => {
-    const option = document.createElement('option')
-    option.value = language
-    option.textContent = language
-    languageSelect.appendChild(option)
-})
-
-document.getElementById('saveConfigApp').addEventListener('click', function(e) {
-    e.preventDefault()
-    changeLanguage()
-})
-
-function changeLanguage() {
-    const selectedLanguage = document.getElementById('taskLanguage').value
-    
-    console.log('Idioma seleccionado:', selectedLanguage)
 }
 
 /* Menu ------------------------------------------------------------------- */
