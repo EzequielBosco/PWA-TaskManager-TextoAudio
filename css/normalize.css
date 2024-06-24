@@ -3,10 +3,11 @@
     --blackTransp: rgba(0, 0, 0,0.4);
     --shadow: rgba(0, 0, 0, 0.1);
     --grey: rgb(140, 140, 140);       
+    --grey-hover: rgba(140, 140, 140, 0.603);       
     --white: rgb(255, 255, 255);
     --green: rgb(0, 182, 126);
     --green-hover: rgb(5, 148, 105);
-    --green-1: rgba(11, 179, 128, 0.267);
+    --green-1: rgba(11, 179, 129, 0.342);
     --red: rgb(200, 35, 51);
     --red-hover: rgb(182, 30, 46);
     --blue: rgb(108, 99, 255);

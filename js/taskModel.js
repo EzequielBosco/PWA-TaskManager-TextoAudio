@@ -5,12 +5,12 @@ export const taskStatus = {
 }
 
 export class Task {
-    constructor(id, title, description, endDate = null, status = taskStatus.notStarted) {
+    constructor(id, title, description, startDate = new Date().toLocaleString(), endDate = null, status = taskStatus.notStarted) {
         this.id = id
         this.title = title
         this.description = description
-        this.startDate = new Date().toLocaleString()
-        this.dueDate = endDate
+        this.startDate = startDate 
+        this.endDate = status === taskStatus.finished ? new Date().toLocaleString() : endDate
         this.status = status
     }
 
@@ -18,11 +18,13 @@ export class Task {
         if (!Object.values(taskStatus).includes(newStatus)) {
             throw new Error(`Estado inválido: ${newStatus}`)
         }
-        this.status = newStatus
 
-        if (newStatus === taskStatus.finished) {
+        if (this.status !== taskStatus.finished && newStatus === taskStatus.finished) {
             this.endDate = new Date().toLocaleString()
-        } else {
+        } 
+        this.status = newStatus
+        
+        if (newStatus !== taskStatus.finished) {
             this.endDate = null
         }
     }

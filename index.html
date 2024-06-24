@@ -20,8 +20,7 @@
             <box-icon name='menu' id="menuToggle"></box-icon>
             <ul id="menu" class="menu hidden">
                 <li id="menuCreateTask">Crear nueva tarea</li>
-                <li id="menuModificateStatus">Modificar estado en tarea</li>
-                <li id="menuConfigurationApp">Configurar aplicación</li>
+                <li id="menuConfigApp">Configurar aplicación</li>
             </ul>
         </nav>
         <h3>TaskSound</h3>
@@ -38,7 +37,21 @@
                     <input type="text" id="taskTitle" placeholder="Ingresa un título..." required>
                     <label for="taskDescription">Descripción</label>
                     <textarea id="taskDescription" placeholder="Ingresa una descripción" required></textarea>
+                    <label for="taskStatus">Estado</label>
+                    <select id="taskStatus" required></select>
                     <button type="submit" id="addTaskBtn">Agregar tarea</button>
+                </form>
+            </section>
+        </div>
+        <div id="modalConfigApp" class="modal">
+            <section class="task-form-modal">
+                <span class="close-modal" data-modal-id="modalConfigApp">&times;</span>
+                <h1>Task Sound</h1>
+                <h3>Configurar aplicación</h3>
+                <form class="form">
+                    <label for="taskLanguage">Seleccionar idioma</label>
+                    <select id="taskLanguage" required></select>
+                    <button id="saveConfigApp">Guardar cambios</button>
                 </form>
             </section>
         </div>

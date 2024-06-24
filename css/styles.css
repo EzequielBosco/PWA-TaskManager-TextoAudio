@@ -90,7 +90,7 @@ header img {
     display: block;
     padding: 10px;
     text-decoration: none;
-    color: #333;
+    color: var(--black);
     transition: background-color 0.3s;
 }
 
@@ -106,7 +106,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 200px;
+    padding: 150px 200px 100px 200px;
 }
 
 /* Form modal */
@@ -168,11 +168,16 @@ main {
     font-size: 16px;
 }
 
+.form #taskStatus {
+    margin-bottom: 1rem;
+}
+
 button {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
     background-color: var(--blue);
+    box-shadow: 2px 4px 8px var(--black);
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -188,13 +193,13 @@ button:hover {
 .content-section {
     display: flex;
     flex: 1;
+    align-items: center;
     width: 100%;
     gap: 20px;
 }
 
 .task-list-section {
     flex: 1 1 70%;
-    padding-right: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,6 +209,11 @@ button:hover {
 
 aside {
     flex: 1 1 30%;
+}
+
+aside img {
+    min-width: 200px;
+    height: auto;
 }
 
 .task-list {
@@ -224,12 +234,14 @@ aside {
 .task-item {
     background-color: #f8f9fa;
     border-radius: 5px;
-    padding: 10px;
+    padding: 5px 20px;
     margin-bottom: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
-    box-shadow: 0 2px 4px var(--shadow);
+    box-shadow: 2px 2px 8px var(--shadow);
+    gap: 20px;
+    width: 28rem;
 }
 
 .task-item span {
@@ -237,28 +249,78 @@ aside {
 }
 
 .task-item button {
-    background-color: var(--red);
     border: none;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
     padding: 5px 10px;
     transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.task-item button:hover {
+.task-item .btn-status {
+    min-width: 140px;
+    max-width: 140px;
+}
+
+.task-item .btn-delete {
+    background-color: var(--red);
+}
+
+.task-item .btn-delete:hover {
     background-color: var(--red-hover);
 }
 
-.task-item.completed {
+#icon {
+    display: none;
+}
+
+.task-item.not-started button {
+    color: var(--black);
+}
+
+.task-item.not-started .btn-status {
+    background-color: var(--back);
+}
+
+.task-item.not-started .btn-status:hover {
+    background-color: var(--grey-hover);
+}
+
+.task-item.in-progress .btn-status {
+    background-color: var(--blue);
+}
+
+.task-item.in-progress .btn-status:hover {
+    background-color: var(--blue-hover);
+}
+
+.task-item.finished .btn-status {
+    background-color: var(--green);
+}
+
+.task-item.finished .btn-status:hover {
+    background-color: var(--green-hover);
+}
+
+.task-item.finished {
     background-color: #d4edda;
-    color: #155724;
     opacity: 0.7; 
 }
 
-.task-item.completed h3,
-.task-item.completed p {
+.task-item.finished h3 {
     text-decoration: line-through;
+}
+
+.task-item.finished #icon {
+    display: flex;
+}
+
+.task-item.finished #icon-x {
+    display: none;
 }
 
 /*Footer*/
@@ -286,10 +348,22 @@ footer em:hover {
 
 /* Media Queries */
 
-@media (max-width: 768px) {
+@media (min-width: 901px) and (max-width: 1080px) {
+    .content-section {
+        gap: 45px;
+    }
+
+    main {
+        padding-top: 200px;
+    }
+}
+
+@media (max-width: 900px) {
     .content-section {
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        padding-top: 4rem;
     }
 
     .task-list-section {
@@ -298,6 +372,23 @@ footer em:hover {
 
     aside {
         margin-top: 20px;
-        width: 50%;
+    }
+
+    aside img {
+        width: 150px;
+    }
+
+    main {
+        padding-top: 250px;
+    }
+
+    .task-item {
+        width: 20rem;
+        gap: 10px;
+    }
+
+    .task-item .btn-status {
+        min-width: 130px;
+        max-width: 130px;
     }
 }
